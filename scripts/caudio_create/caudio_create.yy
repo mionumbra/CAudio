@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"caudio_create",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"caudio_create",
+  "parent":{
+    "name":"CAudio",
+    "path":"folders/CAudio.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
