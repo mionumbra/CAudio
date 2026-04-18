@@ -6,6 +6,7 @@ function caudio_wav() {
 		/// 解析 WAV 文件头
         parseHeader: (function(_path) {
 			var audioFormat, channels, sampleRate, bits, byteRate, blockAlign, dataOffset, dataSize;
+			var channelMask = 0; // WAVEFORMATEXTENSIBLE 扩展字段
 			
 			// 准备
 			var _id_b, _len;
@@ -32,6 +33,16 @@ function caudio_wav() {
 					blockAlign = (buffer_read(_id_b, buffer_u16));
 					bits = (buffer_read(_id_b, buffer_u16));
 					
+					// 扩展字段 (WAVEFORMATEXTENSIBLE)
+					if (audioFormat == 65534) {
+						var _cb_size = (buffer_read(_id_b, buffer_u16));
+						if (_cb_size >= 22) {
+							var _valid_bits = (buffer_read(_id_b, buffer_u16));
+							channelMask = (buffer_read(_id_b, buffer_u32));
+							buffer_seek(_id_b, buffer_seek_relative, 16); // SubFormat GUID (16 字节) 可跳过
+						};
+					};
+					
 					buffer_delete(_id_b);
 				} elif (_chunk_id == 0x61746164) { // "data"
 					dataOffset = _i;
@@ -39,22 +50,40 @@ function caudio_wav() {
 					break;
 				};
 				
-				//
-				_i += _chunk_size;
+				// 嗯。
+				_i += _chunk_size; if (_chunk_size & 1) then _i ++;
 			};
 			
 			// 返回
-			return({ audioFormat, channels, sampleRate, bits, byteRate, blockAlign, dataOffset, dataSize });
+			return({ audioFormat, channels, sampleRate, bits, byteRate, blockAlign, dataOffset, dataSize, channelMask });
 		}),
 		
 		/// 判断位深类型
 		parseAudioChennelType: (function(_channels) {
-			return((_channels == 1) ? (audio_mono) : (audio_stereo));
+			switch(_channels) {
+				case(1): 
+					return(audio_mono);
+				case(2): 
+					return(audio_stereo);
+				case(6): 
+					return(audio_3d); // TODO: 实际上不支持。
+				default: 
+					show_debug_message("[CAudio] [WAV] E: Unsupported numOfChannel, fallback to audio_stereo.");
+					return(audio_stereo);
+			};
 		}),
 		
 		/// 判断通道类型
 		parseBufferDataType: (function(_bits) {
-			return((_bits == 8) ? (buffer_u8) : (buffer_s16));
+			switch(_bits) {
+				case(8): 
+					return(buffer_u8);
+				case(16): 
+					return(buffer_s16);
+				default: 
+					show_debug_message("[CAudio] [WAV] E: Unsupported bits, fallback to buffer_s16.");
+					return(buffer_s16);
+			};
 		}),
 	};
 	

@@ -1,0 +1,26 @@
+{
+  "$GMSound":"v2",
+  "%Name":"Sound1",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "channelFormat":2,
+  "compression":3,
+  "compressionQuality":10,
+  "conversionMode":0,
+  "duration":418.51575,
+  "exportDir":"",
+  "name":"Sound1",
+  "parent":{
+    "name":"CAudio",
+    "path":"CAudio.yyp",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":48000,
+  "soundFile":"Sound1.wav",
+  "volume":1.0,
+}
