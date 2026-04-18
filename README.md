@@ -1,2 +1,2 @@
-Support:
+Supported:
 - WAV
