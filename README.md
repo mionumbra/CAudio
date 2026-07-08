@@ -1,4 +1,5 @@
 # CAudio
-CAudio, built with GML. \n
+CAudio, built with GML.
+
 Supported:
 - WAV
