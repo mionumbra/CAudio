@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"caudio_flac",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"caudio_flac",
+  "parent":{
+    "name":"Parser",
+    "path":"folders/CAudio/Parser.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

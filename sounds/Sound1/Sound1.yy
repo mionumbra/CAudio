@@ -6,7 +6,7 @@
     "path":"audiogroups/audiogroup_default",
   },
   "bitDepth":1,
-  "channelFormat":2,
+  "channelFormat":1,
   "compression":3,
   "compressionQuality":10,
   "conversionMode":0,

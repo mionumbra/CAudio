@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"uint32",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"uint32",
+  "parent":{
+    "name":"CAudio",
+    "path":"CAudio.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
